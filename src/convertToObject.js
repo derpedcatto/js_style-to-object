@@ -8,20 +8,22 @@ const complexStylesString = require('./stylesString');
  * @return {object}
  */
 function convertToObject(sourceString) {
-  const sourceArr = sourceString
+  const sourceItems = sourceString
     .split(';')
     .map((str) => str.trim())
     .filter((str) => str !== '');
 
-  const sourceObj = {};
+  const parsed = {};
 
-  sourceArr.forEach((item) => {
+  sourceItems.forEach((item) => {
     const [key, value] = item.split(':');
 
-    sourceObj[key.trim()] = value.trim();
+    if (key && value !== undefined) {
+      parsed[key.trim()] = value.trim();
+    }
   });
 
-  return sourceObj;
+  return parsed;
 }
 
 convertToObject(complexStylesString);
